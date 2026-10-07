@@ -1,10 +1,6 @@
 ---
 layout: default
-title: About
-permalink: /about/
 ---
-
-# About
 
 I'm Ans, a Senior Staff Software Engineer at Motorola Solutions. Before that, I did research with the ARiSE lab at North Dakota State University.
 
