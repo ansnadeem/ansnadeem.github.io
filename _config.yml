@@ -1,0 +1,22 @@
+title: Ans Nadeem
+description: Notes on software, systems and whatever I'm building.
+url: https://ansnadeem.github.io
+author: Ans Nadeem
+
+permalink: /:year/:month/:day/:title/
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Footer links. Add, remove or reorder freely.
+links:
+  - name: GitHub
+    url: https://github.com/ansnadeem
+  - name: LinkedIn
+    url: https://linkedin.com/in/ansnadeem
+  - name: RSS
+    url: /feed.xml
+
+exclude:
+  - README.md
