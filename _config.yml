@@ -11,13 +11,13 @@ plugins:
 
 # Footer links. Add, remove or reorder freely.
 links:
-  - name: GitHub
+  - name: github
     url: https://github.com/ansnadeem
-  - name: LinkedIn
+  - name: linkedin
     url: https://linkedin.com/in/ansnadeem
-  - name: X
+  - name: x
     url: https://x.com/ansnadeem2
-  - name: RSS
+  - name: rss
     url: /feed.xml
 
 exclude:
