@@ -96,6 +96,13 @@
   function tipRow(color, name, value) {
     return '<div class="tip-row"><i style="background:' + color + '"></i><span>' + name + '</span><b>' + value + '</b></div>';
   }
+  // On a touch screen there is no mouseleave, so close the popup when the
+  // reader taps anywhere that is not a bar, or scrolls.
+  document.addEventListener('touchstart', function (evt) {
+    var t = evt.target;
+    if (!(t && t.classList && t.classList.contains('hit'))) hideTip();
+  }, { passive: true });
+  window.addEventListener('scroll', hideTip, { passive: true });
 
   function drawDaily(fig) {
     var plot = fig.querySelector('.chart-plot');
@@ -222,7 +229,25 @@
   if (b) {
     legend(b, costSeries);
   }
-  render();
-  var timer;
-  window.addEventListener('resize', function () { clearTimeout(timer); timer = setTimeout(render, 100); });
+  // Safari can run this before the stylesheet has laid the page out, so the
+  // first measurement is too wide. Redraw whenever a chart's width changes.
+  var drawnAt = {};
+  function renderIfResized() {
+    var changed = false;
+    [a, b].forEach(function (fig) {
+      if (!fig) return;
+      var w = fig.querySelector('.chart-plot').clientWidth;
+      if (drawnAt[fig.id] !== w) { drawnAt[fig.id] = w; changed = true; }
+    });
+    if (changed) render();
+  }
+  renderIfResized();
+  window.addEventListener('load', renderIfResized);
+  if (window.ResizeObserver) {
+    var ro = new ResizeObserver(renderIfResized);
+    [a, b].forEach(function (fig) { if (fig) ro.observe(fig.querySelector('.chart-plot')); });
+  } else {
+    var timer;
+    window.addEventListener('resize', function () { clearTimeout(timer); timer = setTimeout(renderIfResized, 100); });
+  }
 })();
