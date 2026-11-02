@@ -22,5 +22,6 @@
   <footer>
     {% for link in site.links %}<a href="{{ link.url | relative_url }}">{{ link.name }}</a>{% endfor %}
   </footer>
+  {% if page.charts %}<script src="{{ page.charts | relative_url }}" defer></script>{% endif %}
 </body>
 </html>
